@@ -1,0 +1,20 @@
+_BASE_CONFIG_: tools/cfgs/nuscenes_models/transfusion_lidar.yaml
+
+CLASS_NAMES: ['car', 'truck', 'construction_vehicle', 'bus', 'trailer', 'barrier', 'motorcycle', 'bicycle', 'pedestrian', 'traffic_cone']
+
+DATA_CONFIG:
+    _BASE_CONFIG_: tools/cfgs/dataset_configs/carla_nuscenes6_transfusion_dataset.yaml
+
+MODEL:
+    DENSE_HEAD:
+        NUM_PROPOSALS: 200
+
+        POST_PROCESSING:
+            SCORE_THRESH: 0.05
+            POST_CENTER_RANGE: [-61.2, -61.2, -10.0, 61.2, 61.2, 10.0]
+
+    POST_PROCESSING:
+        RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+        SCORE_THRESH: 0.1
+        OUTPUT_RAW_SCORE: False
+        EVAL_METRIC: kitti

@@ -1,10 +1,10 @@
+import json
 import pickle
 import time
 
 import numpy as np
 import torch
 import tqdm
-
 from pcdet.models import load_data_to_gpu
 from pcdet.utils import common_utils
 
@@ -130,6 +130,17 @@ def eval_one_epoch(cfg, args, model, dataloader, epoch_id, logger, dist_test=Fal
 
     logger.info(result_str)
     ret_dict.update(result_dict)
+
+    metrics_payload = {
+        'epoch': str(epoch_id),
+        'checkpoint': getattr(args, 'ckpt', None),
+        'sec_per_example': sec_per_example,
+        'avg_pred_objects': total_pred_objects / max(1, len(det_annos)),
+        'metrics': ret_dict,
+        'result_text': result_str,
+    }
+    with open(result_dir / 'metrics.json', 'w', encoding='utf-8') as f:
+        json.dump(metrics_payload, f, indent=2, sort_keys=True)
 
     logger.info('Result is saved to %s' % result_dir)
     logger.info('****************Evaluation done.*****************')

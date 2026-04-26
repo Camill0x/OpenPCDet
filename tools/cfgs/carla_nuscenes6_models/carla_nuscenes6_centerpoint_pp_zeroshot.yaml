@@ -1,0 +1,12 @@
+_BASE_CONFIG_: tools/cfgs/nuscenes_models/cbgs_dyn_pp_centerpoint.yaml
+
+CLASS_NAMES: ['car', 'truck', 'construction_vehicle', 'bus', 'trailer', 'barrier', 'motorcycle', 'bicycle', 'pedestrian', 'traffic_cone']
+
+DATA_CONFIG:
+    _BASE_CONFIG_: tools/cfgs/dataset_configs/carla_nuscenes6_centerpoint_dataset.yaml
+
+MODEL:
+    POST_PROCESSING:
+        RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+        SCORE_THRESH: 0.1
+        EVAL_METRIC: kitti

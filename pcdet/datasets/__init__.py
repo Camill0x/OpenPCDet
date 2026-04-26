@@ -1,19 +1,24 @@
-import torch
 from functools import partial
+
+import torch
+from pcdet.utils import common_utils
 from torch.utils.data import DataLoader
 from torch.utils.data import DistributedSampler as _DistributedSampler
 
-from pcdet.utils import common_utils
-
+from .carla_nuscenes6.carla_nuscenes6_dataset import CarlaNuScenes6Dataset
+from .custom.custom_dataset import CustomDataset
 from .dataset import DatasetTemplate
 from .kitti.kitti_dataset import KittiDataset
-from .nuscenes.nuscenes_dataset import NuScenesDataset
-from .waymo.waymo_dataset import WaymoDataset
-from .pandaset.pandaset_dataset import PandasetDataset
 from .lyft.lyft_dataset import LyftDataset
+from .nuscenes.nuscenes_dataset import NuScenesDataset
 from .once.once_dataset import ONCEDataset
-from .argo2.argo2_dataset import Argo2Dataset
-from .custom.custom_dataset import CustomDataset
+from .pandaset.pandaset_dataset import PandasetDataset
+from .waymo.waymo_dataset import WaymoDataset
+
+try:
+    from .argo2.argo2_dataset import Argo2Dataset
+except ImportError:
+    Argo2Dataset = None
 
 __all__ = {
     'DatasetTemplate': DatasetTemplate,
@@ -24,7 +29,8 @@ __all__ = {
     'LyftDataset': LyftDataset,
     'ONCEDataset': ONCEDataset,
     'CustomDataset': CustomDataset,
-    'Argo2Dataset': Argo2Dataset
+    'Argo2Dataset': Argo2Dataset,
+    'CarlaNuScenes6Dataset': CarlaNuScenes6Dataset
 }
 
 
