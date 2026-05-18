@@ -10,7 +10,7 @@ MODEL:
         NUM_PROPOSALS: 200
 
         POST_PROCESSING:
-            SCORE_THRESH: 0.05
+            SCORE_THRESH: 0.0
             POST_CENTER_RANGE: [-61.2, -61.2, -10.0, 61.2, 61.2, 10.0]
 
     POST_PROCESSING:

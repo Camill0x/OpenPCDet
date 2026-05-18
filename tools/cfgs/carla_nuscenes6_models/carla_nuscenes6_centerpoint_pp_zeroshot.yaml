@@ -6,7 +6,17 @@ DATA_CONFIG:
     _BASE_CONFIG_: tools/cfgs/dataset_configs/carla_nuscenes6_centerpoint_dataset.yaml
 
 MODEL:
+    DENSE_HEAD:
+        POST_PROCESSING:
+            SCORE_THRESH: 0.1
+            POST_CENTER_LIMIT_RANGE: [-61.2, -61.2, -10.0, 61.2, 61.2, 10.0]
+            MAX_OBJ_PER_SAMPLE: 500
+            NMS_CONFIG:
+                NMS_TYPE: nms_gpu
+                NMS_THRESH: 0.2
+                NMS_PRE_MAXSIZE: 1000
+                NMS_POST_MAXSIZE: 83
+
     POST_PROCESSING:
         RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
-        SCORE_THRESH: 0.1
         EVAL_METRIC: kitti
